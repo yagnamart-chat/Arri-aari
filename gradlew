@@ -1,5 +1,11 @@
-@echo off
-set DIR=%~dp0
-set JAR=%DIR%gradle\wrapper\gradle-wrapper.jar
+#!/usr/bin/env sh
 
-java -jar %JAR% %*
+DIR="$(cd "$(dirname "$0")" && pwd)"
+JAR="$DIR/gradle/wrapper/gradle-wrapper.jar"
+
+if [ ! -f "$JAR" ]; then
+  echo "ERROR: gradle-wrapper.jar not found!"
+  exit 1
+fi
+
+java -jar "$JAR" "$@"
